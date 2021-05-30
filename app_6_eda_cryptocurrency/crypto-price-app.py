@@ -26,7 +26,6 @@ st.image(image, width = 500)
 st.title('Crypto Price App')
 st.markdown("""
 This app retrieves cryptocurrency prices for the top 100 cryptocurrency from the **CoinMarketCap**!
-
 """)
 #---------------------------------#
 # About
@@ -77,11 +76,11 @@ def load_data():
       coin_name.append(i['slug'])
       coin_symbol.append(i['symbol'])
       price.append(i['quote'][currency_price_unit]['price'])
-      percent_change_1h.append(i['quote'][currency_price_unit]['percent_change_1h'])
-      percent_change_24h.append(i['quote'][currency_price_unit]['percent_change_24h'])
-      percent_change_7d.append(i['quote'][currency_price_unit]['percent_change_7d'])
-      market_cap.append(i['quote'][currency_price_unit]['market_cap'])
-      volume_24h.append(i['quote'][currency_price_unit]['volume_24h'])
+      percent_change_1h.append(i['quote'][currency_price_unit]['percentChange1h'])
+      percent_change_24h.append(i['quote'][currency_price_unit]['percentChange24h'])
+      percent_change_7d.append(i['quote'][currency_price_unit]['percentChange7d'])
+      market_cap.append(i['quote'][currency_price_unit]['marketCap'])
+      volume_24h.append(i['quote'][currency_price_unit]['volume24h'])
 
     df = pd.DataFrame(columns=['coin_name', 'coin_symbol', 'market_cap', 'percent_change_1h', 'percent_change_24h', 'percent_change_7d', 'price', 'volume_24h'])
     df['coin_name'] = coin_name
@@ -107,8 +106,7 @@ num_coin = col1.slider('Display Top N Coins', 1, 100, 100)
 df_coins = df_selected_coin[:num_coin]
 
 ## Sidebar - Percent change timeframe
-percent_timeframe = col1.selectbox('Percent change time frame',
-                                    ['7d','24h', '1h'])
+percent_timeframe = col1.selectbox('Percent change time frame', ['7d','24h', '1h'])
 percent_dict = {"7d":'percent_change_7d',"24h":'percent_change_24h',"1h":'percent_change_1h'}
 selected_percent_timeframe = percent_dict[percent_timeframe]
 
