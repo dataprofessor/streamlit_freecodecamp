@@ -61,6 +61,7 @@ if st.button('Intercorrelation Heatmap'):
 
     df_selected_htmp = df.drop(columns=['Player', 'Pos', 'Tm'], axis=1)#Dropping Non-Numerical (string) Columns
     #corr = df.corr()
+    corr = df_selected_htmp.corr()
     mask = np.zeros_like(corr)
     mask[np.triu_indices_from(mask)] = True
     with sns.axes_style("white"):
