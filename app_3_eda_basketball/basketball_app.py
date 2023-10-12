@@ -59,10 +59,13 @@ if st.button('Intercorrelation Heatmap'):
     df_selected_team.to_csv('output.csv',index=False)
     df = pd.read_csv('output.csv')
 
-    corr = df.corr()
+    df_selected_htmp = df.drop(columns=['Player', 'Pos', 'Tm'], axis=1)#Dropping Non-Numerical (string) Columns
+    #corr = df.corr()
+    corr = df_selected_htmp.corr()
     mask = np.zeros_like(corr)
     mask[np.triu_indices_from(mask)] = True
     with sns.axes_style("white"):
         f, ax = plt.subplots(figsize=(7, 5))
         ax = sns.heatmap(corr, mask=mask, vmax=1, square=True)
-    st.pyplot()
+    #st.pyplot()
+    st.pyplot(f)
